@@ -1,49 +1,83 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Dat phong</a>
-                </li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">QUẢN LÝ KHÁCH SẠN</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-                {% if current_user.is_authenticated %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Đặt phòng</a>
+            </li>
+            {% if current_user.is_authenticated %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Chào {{current_user.username}}!
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Phòng đã đặt</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout">Đăng xuất</a>
+                </div>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/login">Đăng nhập</a>
+            </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Chao {{current_user.username}}!
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Phong da dat</a></li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="/logout">Dang xuat</a></li>
-                    </ul>
-                </li>
-                {% else %}
-
-
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/login">Dang nhap</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/register">Dang ky</a>
-                </li>
-                {% endif %}
-            </ul>
-
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/register">Đăng ký</a>
+            </li>
+            {% endif %}
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="button" data-toggle="modal"
+                    data-target="#searchModal">Search
+            </button>
+        </form>
     </div>
 </nav>
+
+<form method="post" action="">
+    <div class="modal fade" id="searchModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Tìm kiếm</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="mb-2">
+                        <label class="form-label">Ngày nhận phòng</label>
+                        <input type="date" value="startDate" name="startDate" class="form-control"/>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Ngày trả phòng</label>
+                        <input type="date" value="endDate" name="endDate" class="form-control"/>
+                    </div>
+                    <div class="form-check-inline">
+                        <form id="optRoom">
+                            <label><input type="radio" value="1" name="option" checked/>Phong don</label>
+                            <label><input type="radio" value="2" name="option"/>Phong doi</label>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Tìm kiếm
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

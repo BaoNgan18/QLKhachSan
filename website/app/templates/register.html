@@ -1,4 +1,3 @@
-
 {% extends 'layout/base.html' %}
 
 {% block content %}
@@ -10,32 +9,31 @@
 
 <form method="post" enctype="multipart/form-data">
 
-  <div class="mb-3">
-    <label class="form-label">Tên nguoi dung</label>
-    <input type="name" class="form-control" id="name" placeholder="Tên nguoi dung" name="name">
-  </div>
+    <div class="mb-3">
+        <label class="form-label">Tên người dùng</label>
+        <input type="name" class="form-control" id="name" placeholder="Tên người dùng" name="name">
+    </div>
 
-  <div class="mb-3">
-    <label class="form-label">Tên đăng nhập</label>
-    <input type="username" class="form-control" id="username" placeholder="Tên đăng nhập" name="username">
-  </div>
+    <div class="mb-3">
+        <label class="form-label">Tên đăng nhập</label>
+        <input type="username" class="form-control" id="username" placeholder="Tên đăng nhập" name="username">
+    </div>
 
-  <div class="mb-3">
-    <label class="form-label">Mật khẩu</label>
-    <input type="password" class="form-control" id="password" placeholder="Mật khẩu" name="password">
-  </div>
+    <div class="mb-3">
+        <label class="form-label">Mật khẩu</label>
+        <input type="password" class="form-control" id="password" placeholder="Mật khẩu" name="password">
+    </div>
 
-     <div class="mb-3">
-    <label class="form-label">Xác nhận mật khẩu</label>
-    <input type="password" class="form-control" id="confirm" placeholder="Xác nhận mật khẩu" name="confirm">
-  </div>
+    <div class="mb-3">
+        <label class="form-label">Xác nhận mật khẩu</label>
+        <input type="password" class="form-control" id="confirm" placeholder="Xác nhận mật khẩu" name="confirm">
+    </div>
 
-  </div>
-     <div class="mb-3">
-    <label class="form-label">Ảnh đại diện</label>
-    <input type="file" class="form-control" id="avatar" placeholder="Ảnh đại diện" name="avatar">
-  </div>
+    <div class="mb-3">
+        <label class="form-label">Ảnh đại diện</label>
+        <input type="file" class="form-control" id="avatar" placeholder="Ảnh đại diện" name="avatar">
+    </div>
 
-  <button type="submit" class="btn btn-primary">Đăng ký</button>
+    <button type="submit" class="btn btn-primary">Đăng ký</button>
 </form>
 {% endblock %}

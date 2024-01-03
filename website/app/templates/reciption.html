@@ -1,0 +1,148 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+
+<div class="modal" tabindex="-1" role="dialog" id="bookModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="mb-2">
+                        <label class="form-label">Ngày nhận phòng</label>
+                        <input type="date" class="form-control"/>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Ngày trả phòng</label>
+                        <input type="date" class="form-control"/>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Chọn phòng</label>
+                        <select
+                                class="selectpicker mb-2"
+                                multiple
+                                data-live-search="true"
+                        >
+                            <option>Mustard</option>
+                            <option>Ketchup</option>
+                            <option>Relish</option>
+                            <option>Mustard</option>
+                        </select>
+                    </div>
+                    <div class="container mb-2">
+                        <h4>Thông tin khách thuê</h4>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Họ và tên</th>
+                                <th>CCCD</th>
+                                <th>Địa chỉ</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Nguyễn Văn A</td>
+                                <td>012312312312</td>
+                                <td>Thành phố Hồ Chí Minh</td>
+                                <td>
+                                    <button
+                                            type="button"
+                                            class="btn btn-danger"
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                    >
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>
+                                    <div class="mb-3">
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="name"
+                                                value="name"
+                                        />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mb-3">
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="id"
+                                                value="id"
+                                        />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mb-3">
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="address"
+                                                value="address"
+                                        />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="mb-3">
+                                        <button
+                                                type="button"
+                                                class="btn btn-danger"
+                                                data-dismiss="modal"
+                                                aria-label="Close"
+                                        >
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="5">
+                                    <button
+                                            type="button"
+                                            class="btn btn-primary btn-lg btn-block"
+                                            data-dismiss="modal"
+                                            aria-label="Close"
+                                    >
+                                        <span aria-hidden="true">&plus;</span>
+                                    </button>
+                                </th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+                <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                >
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

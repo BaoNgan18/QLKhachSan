@@ -1,12 +1,37 @@
-from flask import Flask, render_template, request, redirect
+from flask import render_template, request, redirect
 from app import app, login
 import dao
 from flask_login import login_user, logout_user
+import math
 
 
-@app.route('/')
+@app.route('/', methods=['get', 'post'])
 def index():
-    return render_template('index.html')
+    opt = request.form.get('option')
+    page = request.args.get("page")
+
+    rooms = dao.load_rooms(opt=opt, page=page)
+
+    total = dao.count_rooms()
+
+    return render_template('index.html',
+                           rooms=rooms,
+                           pages=math.ceil(total / app.config['PAGE_SIZE']))
+
+
+# @app.route('/search', method=['post'])
+# def search():
+#     startDate = request.form.get('startDate')
+#     endDate = request.form.get('endDate')
+#     selected = request.form['radio_option']
+#
+#     if selected:
+#
+#     if startDate < endDate
+
+@app.route('/booking', methods=['get', 'post'])
+def booking():
+    return render_template('booking.html', rooms=dao.load_rooms())
 
 
 @app.route('/admin/login', methods=['post'])
