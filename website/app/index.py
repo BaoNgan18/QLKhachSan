@@ -25,10 +25,10 @@ def index():
 #     endDate = request.form.get('endDate')
 #     selected = request.form['radio_option']
 #
-#     if selected:
+#     if request.method.__eq__('POST'):
+#         return render_template('index.html')
 #
-#     if startDate < endDate
-
+#
 @app.route('/booking', methods=['get', 'post'])
 def booking():
     return render_template('booking.html', rooms=dao.load_rooms())
