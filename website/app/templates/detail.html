@@ -1,0 +1,18 @@
+{% extends 'layout/base.html' %}
+
+{% block title %} Chi tiết {% endblock %}
+
+{% block content %}
+<section>
+    <div class="row align-items-center">
+        <div class="col-6">
+            <img src="{{room.image}}" alt="{{room.name}}" class="img-thumbnail">
+        </div>
+        <div class="col-6">
+            <h1>{{room.name}}</h1>
+            <h4>{{ "{:,.0f}".format(room.price) }} VNĐ</h4>
+            <a href="/booking" class="btn btn-danger">Đặt phòng</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

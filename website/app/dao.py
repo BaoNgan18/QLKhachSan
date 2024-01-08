@@ -11,8 +11,7 @@ def get_categories():
 def load_rooms(opt=None, page=None):
     rooms = Room.query
 
-    if opt:
-        rooms = rooms.filter(Room.category_id.__eq__(opt))
+    # rooms = rooms.filter(Room.active.__eq__(1))
 
     if page:
         page = int(page)
@@ -23,10 +22,14 @@ def load_rooms(opt=None, page=None):
     return rooms.all()
 
 
-def change_status(room_id):
-    room = Room.query.get(room_id)
-    room.active = 1 - room.active
-    return room
+def get_room_by_id(room_id):
+    return Room.query.get(room_id)
+
+
+# def change_status(room_id):
+#     room = Room.query.get(room_id)
+#     room.active = 1 - room.active
+#     return room
 
 
 def count_rooms():

@@ -4,6 +4,8 @@ from flask_admin.contrib.sqla import ModelView
 from app.models import Category, Room, UserRoleEnum
 from flask_login import logout_user, current_user
 from flask import redirect, request
+from wtforms import SelectField, FileField
+from wtforms.validators import InputRequired
 
 
 class AdminIndex(AdminIndexView):
@@ -13,6 +15,7 @@ class AdminIndex(AdminIndexView):
 
 
 admin = Admin(app=app, name='QUAN LY KHACH SAN', template_mode='bootstrap4', index_view=AdminIndex())
+
 
 class AuthenticatedUser(BaseView):
     def is_accessible(self):
@@ -27,9 +30,19 @@ class AuthenticatedAdmin(ModelView):
 class RoomView(AuthenticatedAdmin):
     column_list = ['id', 'name', 'price', 'category']
     column_searchable_list = ['name']
-    column_filters = ['price', 'name']
+    column_filters = ['price', 'name', 'category_id']
+    column_exclude_list = ['image']
+    column_labels = {
+        'id': 'Mã phòng',
+        'name': 'Tên phòng',
+        'price': 'Đơn giá',
+        'category': 'Tên loại phòng'
+    }
     can_export = True
     can_view_details = True
+    can_edit = True
+    details_modal = True
+    edit_modal = True
 
 
 class CategoryView(AuthenticatedAdmin):
@@ -38,6 +51,7 @@ class CategoryView(AuthenticatedAdmin):
     column_filters = ['name']
     can_export = True
     can_view_details = True
+    can_edit = True
 
 
 class StatsView(AuthenticatedUser):
@@ -56,7 +70,7 @@ class LogoutView(AuthenticatedUser):
         return redirect('/admin')
 
 
-admin.add_view(CategoryView(Category, db.session))
-admin.add_view(RoomView(Room, db.session))
+admin.add_view(CategoryView(Category, db.session, name='Danh mục'))
+admin.add_view(RoomView(Room, db.session, name='Phòng'))
 admin.add_view(StatsView(name='Thống kê báo cáo'))
 admin.add_view(LogoutView(name='Đăng xuất'))

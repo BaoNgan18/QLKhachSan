@@ -31,7 +31,17 @@ def index():
 #
 @app.route('/booking', methods=['get', 'post'])
 def booking():
+    name = request.form.get('name')
+    startDate = request.form.get('startDate')
+    endDate = request.form.get('endDate')
+    rooms = request.form.getlist('optRoom')
+    print(name, startDate, endDate, rooms)
     return render_template('booking.html', rooms=dao.load_rooms())
+
+
+@app.route('/detail/<id>', methods=['get'])
+def detail(id):
+    return render_template('detail.html', room=dao.get_room_by_id(id))
 
 
 @app.route('/admin/login', methods=['post'])
