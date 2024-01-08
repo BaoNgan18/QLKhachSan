@@ -1,3 +1,6 @@
+from wtforms import SelectField, FileField
+from wtforms.validators import InputRequired
+
 from app import app, db, dao
 from flask_admin import Admin, BaseView, expose, AdminIndexView
 from flask_admin.contrib.sqla import ModelView

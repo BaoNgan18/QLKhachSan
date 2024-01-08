@@ -8,6 +8,7 @@ from datetime import datetime
 
 class UserRoleEnum(enum.Enum):
     USER = 1
+    STAFF = 3
     ADMIN = 2
 
 
@@ -40,6 +41,10 @@ class Room(db.Model):
     name = Column(String(50), nullable=False, unique=True)
     price = Column(Float, default=0)
     image = Column(String(100))
+# =======
+#     image = Column(String(255), nullable=False,
+#                    default='https://res.cloudinary.com/dvissqsma/image/upload/v1703938812/phongdon_vlybnf.jpg')
+# >>>>>>> 06e78af597d1f4e9e4692458f5083b99f3d18db2
     category_id = Column(Integer, ForeignKey(Category.id), nullable=False)
 
     def __str__(self):
@@ -56,6 +61,8 @@ if __name__ == "__main__":
                  username='admin',
                  password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
                  user_role=UserRoleEnum.ADMIN)
+        u1 = User(name='Quốc', username ='customer',
+                 password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()))
         db.session.add(u)
         db.session.commit()
 
