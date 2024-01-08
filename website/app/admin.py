@@ -1,3 +1,6 @@
+from wtforms import SelectField, FileField
+from wtforms.validators import InputRequired
+
 from app import app, db, dao
 from flask_admin import Admin, BaseView, expose, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
@@ -27,9 +30,20 @@ class AuthenticatedAdmin(ModelView):
 class RoomView(AuthenticatedAdmin):
     column_list = ['id', 'name', 'price', 'category']
     column_searchable_list = ['name']
-    column_filters = ['price', 'name']
+    column_filters = ['price', 'name', 'category_id']
+    column_exclude_list = ['image']
+    column_labels = {
+        'id': 'Mã phòng',
+        'name': 'Tên phòng',
+        'price': 'Đơn giá',
+        'category': 'Tên loại phòng'
+    }
     can_export = True
     can_view_details = True
+    can_edit = True
+    details_modal = True
+    edit_modal = True
+
 
 
 class CategoryView(AuthenticatedAdmin):
@@ -38,7 +52,7 @@ class CategoryView(AuthenticatedAdmin):
     column_filters = ['name']
     can_export = True
     can_view_details = True
-
+    can_edit = True
 
 class StatsView(AuthenticatedUser):
     @expose("/")
@@ -56,7 +70,7 @@ class LogoutView(AuthenticatedUser):
         return redirect('/admin')
 
 
-admin.add_view(CategoryView(Category, db.session))
+admin.add_view(CategoryView(Category, db.session, name='Danh mục'))
 admin.add_view(RoomView(Room, db.session))
 admin.add_view(StatsView(name='Thống kê báo cáo'))
 admin.add_view(LogoutView(name='Đăng xuất'))

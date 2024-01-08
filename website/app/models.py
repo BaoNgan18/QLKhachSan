@@ -8,6 +8,7 @@ from flask_login import UserMixin
 
 class UserRoleEnum(enum.Enum):
     USER = 1
+    STAFF = 3
     ADMIN = 2
 
 
@@ -45,7 +46,7 @@ class Room(db.Model):
     price = Column(Float, default=0)
     image = Column(String(255), nullable=False,
                    default='https://res.cloudinary.com/dvissqsma/image/upload/v1703938812/phongdon_vlybnf.jpg')
-    category_id = Column(Integer, ForeignKey('category.id'), nullable=False)
+    category_id = Column(Integer, ForeignKey(Category.id), nullable=False)
 
     def __str__(self):
         return self.name
@@ -60,6 +61,8 @@ if __name__ == '__main__':
         u = User(name='Admin', username='admin',
                  password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
                  user_role=UserRoleEnum.ADMIN)
+        u1 = User(name='Quốc', username ='customer',
+                 password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()))
         db.session.add(u)
         db.session.commit()
 
