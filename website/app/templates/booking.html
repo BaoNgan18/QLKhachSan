@@ -30,9 +30,11 @@
                     class="selectpicker mb-2"
                     multiple
                     data-live-search="true"
+                    multiple title="---"
+                    name="optRoom"
             >
                 {% for r in rooms %}
-                <option name="optRoom" value="{{r.id}}">{{r.name}}</option>
+                <option value="{{r.id}}">{{r.name}}</option>
                 {% endfor %}
             </select>
         </div>
@@ -40,7 +42,7 @@
         <div class="container mb-2">
             <h4>Thông tin khách hàng</h4>
 
-            <table id="myTable" class="table">
+            <table id="myTable" class="table" name="customer">
                 <thead class="text-center">
                 <tr>
                     <th>Họ tên</th>
@@ -125,7 +127,6 @@
             return {data: c};
         });
         let jsonString = JSON.stringify(customer);
-        console.log(customer);
     }
 </script>
 {% endblock %}

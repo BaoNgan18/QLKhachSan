@@ -1,148 +1,129 @@
 {% extends 'layout/base.html' %}
+{% block title %} Thuê phòng {% endblock %}
+
 {% block content %}
 
-<div class="modal" tabindex="-1" role="dialog" id="bookModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                >
-                    <span aria-hidden="true">&times;</span>
-                </button>
+<div class="container-md">
+    <h1 class="label text-center text-success mt-3">Phiếu thuê phòng</h1>
+    <form action="/booking" method="post" >
+
+        <div class="form-row">
+            <div class="mb-2 col-6">
+                <label class="form-label">Ngày nhận phòng</label>
+                <input type="date" class="form-control" name="startDate" id="startDate"/>
             </div>
-            <div class="modal-body">
-                <form>
 
-                    <div class="mb-2">
-                        <label class="form-label">Ngày nhận phòng</label>
-                        <input type="date" class="form-control"/>
-                    </div>
-
-                    <div class="mb-2">
-                        <label class="form-label">Ngày trả phòng</label>
-                        <input type="date" class="form-control"/>
-                    </div>
-
-                    <div class="mb-2">
-                        <label class="form-label">Chọn phòng</label>
-                        <select
-                                class="selectpicker mb-2"
-                                multiple
-                                data-live-search="true"
-                        >
-                            <option>Mustard</option>
-                            <option>Ketchup</option>
-                            <option>Relish</option>
-                            <option>Mustard</option>
-                        </select>
-                    </div>
-                    <div class="container mb-2">
-                        <h4>Thông tin khách thuê</h4>
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Họ và tên</th>
-                                <th>CCCD</th>
-                                <th>Địa chỉ</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Nguyễn Văn A</td>
-                                <td>012312312312</td>
-                                <td>Thành phố Hồ Chí Minh</td>
-                                <td>
-                                    <button
-                                            type="button"
-                                            class="btn btn-danger"
-                                            data-dismiss="modal"
-                                            aria-label="Close"
-                                    >
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>
-                                    <div class="mb-3">
-                                        <input
-                                                type="text"
-                                                class="form-control"
-                                                placeholder="name"
-                                                value="name"
-                                        />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="mb-3">
-                                        <input
-                                                type="text"
-                                                class="form-control"
-                                                placeholder="id"
-                                                value="id"
-                                        />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="mb-3">
-                                        <input
-                                                type="text"
-                                                class="form-control"
-                                                placeholder="address"
-                                                value="address"
-                                        />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="mb-3">
-                                        <button
-                                                type="button"
-                                                class="btn btn-danger"
-                                                data-dismiss="modal"
-                                                aria-label="Close"
-                                        >
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th colspan="5">
-                                    <button
-                                            type="button"
-                                            class="btn btn-primary btn-lg btn-block"
-                                            data-dismiss="modal"
-                                            aria-label="Close"
-                                    >
-                                        <span aria-hidden="true">&plus;</span>
-                                    </button>
-                                </th>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save changes</button>
-                <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal"
-                >
-                    Close
-                </button>
+            <div class="mb-2 col-6">
+                <label class="form-label">Ngày trả phòng</label>
+                <input type="date" class="form-control" name="endDate" id="endDate"/>
             </div>
         </div>
-    </div>
+
+
+        <div class="mb-2">
+            <label class="form-label">Chọn phòng</label>
+            <select
+                    class="selectpicker mb-2"
+                    multiple
+                    data-live-search="true"
+                    title="------"
+                    name="optRoom"
+            >
+                {% for r in rooms %}
+                <option value="{{r.id}}">{{r.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="container mb-2">
+            <h4>Thông tin khách hàng</h4>
+
+            <table id="myTable" class="table" name="customer">
+                <thead class="text-center">
+                <tr>
+                    <th>Họ tên</th>
+                    <th>Địa chỉ</th>
+                    <th>CCCD</th>
+                    <th>Khách nước ngoài</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+             <button
+                    type="button"
+                    class="btn btn-primary btn-sm btn-block mt-2 mb-2"
+                    onclick="create()"
+            >
+                <span aria-hidden="true">&plus;</span>
+            </button>
+        </div>
+        <div class="container-fluid mt-2 mr-2">
+            <button type="submit" onclick="submitForm()" class="btn btn-primary">Đặt phòng</button>
+            <button
+                    type="button"
+                    class="btn btn-secondary"
+            >
+                Hủy
+            </button>
+        </div>
+    </form>
+
 </div>
+
+<script>
+    let x = 0;
+
+    function create() {
+        if (x < 3) {
+            x = document.getElementById("myTable").rows.length;
+            let table = document.getElementById("myTable");
+            let row = table.insertRow(x);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            let cell3 = row.insertCell(2);
+            let cell4 = row.insertCell(3);
+            let cell5 = row.insertCell(4);
+            cell1.innerHTML = `<input type="text" class="form-control" id="hoten">`;
+            cell2.innerHTML = `<input type="text" class="form-control" id="diachi">`;
+            cell3.innerHTML = `<input type="text" class="form-control" id="cccd">`;
+            cell4.innerHTML = `<input class="form-check-input" type="checkbox" value="" id="khachnuocngoai">`;
+            cell5.innerHTML = `
+          <button
+                    type="button"
+                    class="btn btn-danger btn-sm btn-block"
+                    onclick="remove(this)"
+            >
+                <span aria-hidden="true">&times;</span>
+            </button>
+          `;
+        }
+    }
+
+    function remove(r) {
+        let i = r.parentNode.parentNode.rowIndex;
+        document.getElementById("myTable").deleteRow(i);
+        x--;
+    }
+
+    function submitForm() {
+        let table = document.getElementById("myTable");
+        let inputs = table.querySelectorAll("input");
+
+        let obj = [];
+        inputs.forEach((input) => {
+            obj.push(input.value);
+        });
+
+        console.log(obj);
+
+        let temp = _.chunk(obj, 3);
+
+        let customer = temp.map((c) => {
+            return {data: c};
+        });
+        let jsonString = JSON.stringify(customer);
+    }
+</script>
 {% endblock %}
+

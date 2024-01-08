@@ -1,0 +1,66 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-info mt-3">Các phòng đã đặt</h1>
+
+    <div class="row align-items-center mt-3">
+        <div class="col-3">
+            <img src="https://res.cloudinary.com/dvissqsma/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1703938693/phongdoi_rkhssy.jpg"
+                 class="rounded img-thumbnail" alt="avt">
+        </div>
+        <div class="col-7">
+            <h1>Nguoi dat phong</h1>
+            <h3 class="strong">Phòng đã đặt</h3>
+            <h3>Ngày nhận - ngày trả</h3>
+            <h3 class="text-info">Đơn giá VNĐ</h3>
+        </div>
+        <div class="col col-2">
+            <a
+                    type="button"
+                    class="btn btn-success btn-sm btn-block"
+                    href="/payment"
+            >
+                Thanh toán
+            </a>
+            <button
+                    type="button"
+                    class="btn btn-danger btn-sm btn-block"
+                    onclick="alert('cancel')"
+            >
+                Hủy
+            </button>
+        </div>
+    </div>
+    <div class="row align-items-center mt-3">
+        <div class="col-3">
+            <img src="https://res.cloudinary.com/dvissqsma/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1703938693/phongdoi_rkhssy.jpg"
+                 class="rounded img-thumbnail" alt="avt">
+        </div>
+        <div class="col-7">
+            <h1>Nguoi dat phong</h1>
+            <h3 class="strong">Phòng đã đặt</h3>
+            <h3>Ngày nhận - ngày trả</h3>
+            <h3 class="text-info">Đơn giá VNĐ</h3>
+        </div>
+        <div class="col col-2">
+            <a
+                    type="button"
+                    class="btn btn-success btn-sm btn-block"
+                    href="/payment"
+            >
+                Thanh toán
+            </a>
+            <button
+                    type="button"
+                    class="btn btn-danger btn-sm btn-block"
+                    onclick="alert('cancel')"
+            >
+                Hủy
+            </button>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+

@@ -8,10 +8,8 @@ def get_categories():
     return Category.query.all()
 
 
-def load_rooms(opt=None, page=None):
+def load_rooms(page=None):
     rooms = Room.query
-
-    # rooms = rooms.filter(Room.active.__eq__(1))
 
     if page:
         page = int(page)
@@ -58,3 +56,15 @@ def add_user(name, username, password, avatar):
         u.avatar = res['secure_url']
     db.session.add(u)
     db.session.commit()
+
+
+def add_receipt(cart):
+    if cart:
+        receipt = Receipt(user=current_user)
+        db.session.add(receipt)
+
+        for c in cart.values():
+            d = ReceiptDetails(quantity=c['quantity'], price=c['price'], product_id=c['id'], receipt=receipt)
+            db.session.add(d)
+
+        db.session.commit()

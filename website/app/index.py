@@ -5,12 +5,11 @@ from flask_login import login_user, logout_user
 import math
 
 
-@app.route('/', methods=['get', 'post'])
+@app.route('/', methods=['get'])
 def index():
-    opt = request.form.get('option')
     page = request.args.get("page")
 
-    rooms = dao.load_rooms(opt=opt, page=page)
+    rooms = dao.load_rooms(page=page)
 
     total = dao.count_rooms()
 
@@ -29,19 +28,33 @@ def index():
 #         return render_template('index.html')
 #
 #
-@app.route('/booking', methods=['get', 'post'])
+@app.route('/booking/<id>', methods=['get', 'post'])
 def booking():
     name = request.form.get('name')
     startDate = request.form.get('startDate')
     endDate = request.form.get('endDate')
-    rooms = request.form.getlist('optRoom')
-    print(name, startDate, endDate, rooms)
+    if id:
+        room = dao.get_room_by_id(id)
+    else:
+        rooms = request.form.getlist('optRoom')
+    customers = request.form.getlist('jsonString[]')
+    print(name, startDate, endDate, rooms, customers)
     return render_template('booking.html', rooms=dao.load_rooms())
 
 
 @app.route('/detail/<id>', methods=['get'])
 def detail(id):
     return render_template('detail.html', room=dao.get_room_by_id(id))
+
+
+@app.route('/booked', methods=['get'])
+def list():
+    return render_template('booked.html')
+
+
+@app.route('/payment', methods=['get'])
+def payment():
+    return render_template('/payment.html')
 
 
 @app.route('/admin/login', methods=['post'])

@@ -1,0 +1,73 @@
+{% extends 'layout/base.html' %}
+{% block title %} Thanh toán {% endblock %}
+
+{% block content %}
+
+<div class="container-md">
+    <h1 class="label text-center text-success mt-3">Phiếu thanh toán</h1>
+    <form action="/payment" method="post">
+
+        <div class="form-row">
+            <div class="mb-2 col-6">
+                <label class="form-label">Ngày nhận phòng</label>
+                <input type="date" class="form-control" name="startDate" id="startDate"/>
+            </div>
+
+            <div class="mb-2 col-6">
+                <label class="form-label">Ngày trả phòng</label>
+                <input type="date" class="form-control" name="endDate" id="endDate"/>
+            </div>
+        </div>
+
+
+        <div class="mb-2">
+            <label class="form-label">Danh sách phòng</label>
+            <select
+                    class="selectpicker mb-2"
+                    multiple
+                    data-live-search="true"
+                    title="------"
+                    name="optRoom"
+            >
+                {% for r in rooms %}
+                <option value="{{r.id}}">{{r.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <h1 class="text-center text-danger">Tổng tiền VNĐ</h1>
+        <div class="container-fluid mt-2 mr-2">
+            <button type="submit" onclick="submitForm()" class="btn btn-primary">Đặt phòng</button>
+            <button
+                    type="button"
+                    class="btn btn-secondary"
+            >
+                Hủy
+            </button>
+        </div>
+    </form>
+
+</div>
+
+<script>
+
+    function submitForm() {
+        let table = document.getElementById("myTable");
+        let inputs = table.querySelectorAll("input");
+
+        let obj = [];
+        inputs.forEach((input) => {
+            obj.push(input.value);
+        });
+
+        console.log(obj);
+
+        let temp = _.chunk(obj, 3);
+
+        let customer = temp.map((c) => {
+            return {data: c};
+        });
+        let jsonString = JSON.stringify(customer);
+    }
+</script>
+{% endblock %}
+
