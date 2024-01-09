@@ -31,14 +31,13 @@ class AuthenticatedAdmin(ModelView):
 
 
 class RoomView(AuthenticatedAdmin):
-    column_list = ['id', 'name', 'price', 'category']
+    column_list = ['id', 'name', 'category']
     column_searchable_list = ['name']
-    column_filters = ['price', 'name', 'category_id']
+    column_filters = ['name', 'category_id']
     column_exclude_list = ['image']
     column_labels = {
         'id': 'Mã phòng',
         'name': 'Tên phòng',
-        'price': 'Đơn giá',
         'category': 'Tên loại phòng'
     }
     can_export = True
@@ -49,7 +48,7 @@ class RoomView(AuthenticatedAdmin):
 
 
 class CategoryView(AuthenticatedAdmin):
-    column_list = ['id', 'name']
+    column_list = ['id', 'name', 'description', 'price']
     column_searchable_list = ['name']
     column_filters = ['name']
     can_export = True

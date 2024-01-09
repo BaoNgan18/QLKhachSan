@@ -28,17 +28,15 @@ def index():
 #         return render_template('index.html')
 #
 #
-@app.route('/booking/<id>', methods=['get', 'post'])
+@app.route('/booking', methods=['get', 'post'])
 def booking():
     name = request.form.get('name')
     startDate = request.form.get('startDate')
     endDate = request.form.get('endDate')
-    if id:
-        room = dao.get_room_by_id(id)
-    else:
-        rooms = request.form.getlist('optRoom')
+    rooms = request.form.getlist('optRoom')
     customers = request.form.getlist('jsonString[]')
-    print(name, startDate, endDate, rooms, customers)
+
+    print(name, startDate, rooms, endDate, customers)
     return render_template('booking.html', rooms=dao.load_rooms())
 
 
