@@ -31,14 +31,16 @@ class AuthenticatedAdmin(ModelView):
 
 
 class RoomView(AuthenticatedAdmin):
-    column_list = ['id', 'name', 'category']
+    column_list = ['id', 'name', 'category_id', 'status', 'maxCustomers']
     column_searchable_list = ['name']
     column_filters = ['name', 'category_id']
     column_exclude_list = ['image']
     column_labels = {
         'id': 'Mã phòng',
         'name': 'Tên phòng',
-        'category': 'Tên loại phòng'
+        'category': 'Tên loại phòng',
+        'status': 'Trạng thái',
+        'maxCustomers': 'Số khách tối đa'
     }
     can_export = True
     can_view_details = True
@@ -72,7 +74,7 @@ class LogoutView(AuthenticatedUser):
         return redirect('/admin')
 
 
-admin.add_view(CategoryView(Category, db.session, name='Danh mục'))
+admin.add_view(CategoryView(Category, db.session, name='Loại phòng'))
 admin.add_view(RoomView(Room, db.session, name='Phòng'))
 admin.add_view(StatsView(name='Thống kê báo cáo'))
 admin.add_view(LogoutView(name='Đăng xuất'))

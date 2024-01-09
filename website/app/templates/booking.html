@@ -3,6 +3,7 @@
 
 {% block content %}
 
+{% if current_user.is_authenticated %}
 <div class="container-md">
     <h1 class="label text-center text-success mt-3">Phiếu đặt phòng</h1>
     <form action="/booking" method="post" >
@@ -28,9 +29,8 @@
             <label class="form-label">Chọn phòng</label>
             <select
                     class="selectpicker mb-2"
-                    multiple
                     data-live-search="true"
-                    multiple title="---"
+                    title="---"
                     name="optRoom"
             >
                 {% for r in rooms %}
@@ -74,9 +74,12 @@
     </form>
 
 </div>
+{% else %}
+    <h3 class="text-center mt-4">Bạn hãy <a href="/login?next=/cart">đăng nhập</a> để đặt phòng!</h3>
+    {% endif %}
 
 <script>
-    let x = 0;
+    let x = 1
 
     function create() {
         if (x < 3) {
@@ -88,9 +91,9 @@
             let cell3 = row.insertCell(2);
             let cell4 = row.insertCell(3);
             let cell5 = row.insertCell(4);
-            cell1.innerHTML = `<input type="text" class="form-control" id="hoten">`;
-            cell2.innerHTML = `<input type="text" class="form-control" id="diachi">`;
-            cell3.innerHTML = `<input type="text" class="form-control" id="cccd">`;
+            cell1.innerHTML = `<input maxlength="50" required type="text" class="form-control" id="hoten">`;
+            cell2.innerHTML = `<input maxlength="100" required type="text" class="form-control" id="diachi">`;
+            cell3.innerHTML = `<input maxlength="12" required type="text" class="form-control" id="cccd">`;
             cell4.innerHTML = `<input class="form-check-input" type="checkbox" value="" id="khachnuocngoai">`;
             cell5.innerHTML = `
           <button

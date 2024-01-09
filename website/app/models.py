@@ -1,3 +1,5 @@
+import hashlib
+
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum, DateTime, Boolean
 from sqlalchemy.orm import relationship
 from app import db
@@ -34,7 +36,7 @@ class Customer(Person):
     __tablename__ = 'customer'
     user_role = Column(Enum(UserRoleEnum), default=UserRoleEnum.CUSTOMER)
     address = Column(String(255), nullable=False)
-    foreign = Column(Boolean, default=False)    #khach nuoc ngoai
+    foreign = Column(Boolean, default=False)   #khach nuoc ngoai
     # booking = relationship("Booking", backref="customer", lazy=True)
     def __str__(self):
         return self.name
@@ -111,43 +113,43 @@ class Room(db.Model):
 if __name__ == "__main__":
     from app import app
     with app.app_context():
-        # db.create_all()
+        db.create_all()
 
-        import hashlib
-        u = User(name='Admin',
-                 username='admin',
-                 identification='0123123123',
-                 password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
-                 user_role=UserRoleEnum.ADMIN)
+        # import hashlib
+        # u = User(name='Admin',
+        #          username='admin',
+        #          identification='0123123123',
+        #          password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
+        #          user_role=UserRoleEnum.ADMIN)
 
-        # u1 = User(name='Quốc', username ='customer',
+        # u1 = User(name='customer', username ='Quốc', identification='987654321123',
         #          password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()))
-        db.session.add(u)
-        db.session.commit()
+        # db.session.add_all([u1])
+        # db.session.commit()
 
-        c1 = Category(name='Single', description='phong co 1 giuong ngu', price='120000')
-        c2 = Category(name='Double', description='phong co 2 giuong ngu', price='150000')
-
-        db.session.add(c1)
-        db.session.add(c2)
-        db.session.commit()
-
-        r1 = Room(name='R001', category_id=2, status="san sang",
-                     image="https://res.cloudinary.com/dvissqsma/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1703938693/phongdoi_rkhssy.jpg")
-        r2 = Room(name='R002',  status="san sang", category_id=2,
-                     image="https://res.cloudinary.com/dvissqsma/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1703938693/phongdoi_rkhssy.jpg")
-        r3 = Room(name='R003',  status="san sang", category_id=1 )
-        r4 = Room(name='R004',  status="san sang", category_id=1)
-        r5 = Room(name='R101',  status="san sang", category_id=2,
-                     image="https://res.cloudinary.com/dvissqsma/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1703938693/phongdoi_rkhssy.jpg")
-        r6 = Room(name='R102', status="san sang", category_id=1)
-        r7 = Room(name='R103',  status="san sang", category_id=1)
-        r8 = Room(name='R104',  status="san sang", category_id=2,
-                     image="https://res.cloudinary.com/dvissqsma/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1703938693/phongdoi_rkhssy.jpg")
-        r9 = Room(name='R201',  status="san sang", category_id=1)
-        r10 = Room(name='R202',  status="san sang", category_id=2,
-                     image="https://res.cloudinary.com/dvissqsma/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1703938693/phongdoi_rkhssy.jpg")
-
-        db.session.add_all([r1, r2, r3, r4, r5])
-        db.session.add_all([r6, r7, r8, r9, r10])
-        db.session.commit()
+        # c1 = Category(name='Single', description='phong co 1 giuong ngu', price='120000')
+        # c2 = Category(name='Double', description='phong co 2 giuong ngu', price='150000')
+        #
+        # db.session.add(c1, c2)
+        # db.session.add(c2)
+        # db.session.commit()
+        #
+        # r1 = Room(name='R001', category_id=2, status="san sang",
+        #              image="https://res.cloudinary.com/dvissqsma/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1703938693/phongdoi_rkhssy.jpg")
+        # r2 = Room(name='R002',  status="san sang", category_id=2,
+        #              image="https://res.cloudinary.com/dvissqsma/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1703938693/phongdoi_rkhssy.jpg")
+        # r3 = Room(name='R003',  status="san sang", category_id=1 )
+        # r4 = Room(name='R004',  status="san sang", category_id=1)
+        # r5 = Room(name='R101',  status="san sang", category_id=2,
+        #              image="https://res.cloudinary.com/dvissqsma/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1703938693/phongdoi_rkhssy.jpg")
+        # r6 = Room(name='R102', status="san sang", category_id=1)
+        # r7 = Room(name='R103',  status="san sang", category_id=1)
+        # r8 = Room(name='R104',  status="san sang", category_id=2,
+        #              image="https://res.cloudinary.com/dvissqsma/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1703938693/phongdoi_rkhssy.jpg")
+        # r9 = Room(name='R201',  status="san sang", category_id=1)
+        # r10 = Room(name='R202',  status="san sang", category_id=2,
+        #              image="https://res.cloudinary.com/dvissqsma/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1703938693/phongdoi_rkhssy.jpg")
+        #
+        # db.session.add_all([r1, r2, r3, r4, r5])
+        # db.session.add_all([r6, r7, r8, r9, r10])
+        # db.session.commit()
