@@ -34,6 +34,10 @@ def count_rooms():
     return Room.query.count()
 
 
+def get_booking_by_user(name=None, cccd=None):
+    pass
+
+
 def get_user_by_id(user_id):
     return User.query.get(user_id)
 
